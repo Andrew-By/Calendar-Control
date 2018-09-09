@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -27,13 +28,15 @@ namespace Calendar
             FillCalendar();
         }
 
+        public ObservableCollection<ObservableCollection<Human>> People { get; } = new ObservableCollection<ObservableCollection<Human>>();
+
         public void FillCalendar()
         {
             var rand = new Random();
             var buff = new byte[3];
             for (int i = 0; i < 100; i++)
             {
-                var people = new List<Human>();
+                var people = new ObservableCollection<Human>();
                 for (int j = 0; j < 20; j++)
                 {
                     rand.NextBytes(buff);
@@ -45,7 +48,7 @@ namespace Calendar
                         Length = length
                     });
                 }
-                CalendarView.Items.Add(people);
+                People.Add(people);
             }
         }
     }
